@@ -1,14 +1,18 @@
 {
     "name": "middlewares/recaptcha",
     "type": "library",
-    "description": "Recaptcha to create PSR-15 middleware packages",
+    "description": "Middleware to use Google reCAPTCHA for spam prevention",
     "license": "MIT",
     "keywords": [
         "psr-7",
         "psr-15",
         "middleware",
         "server",
-        "http"
+        "http",
+        "google",
+        "recaptcha",
+        "security",
+        "captcha"
     ],
     "homepage": "https://github.com/middlewares/recaptcha",
     "support": {
