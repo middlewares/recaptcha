@@ -3,8 +3,8 @@
 namespace Middlewares\Tests;
 
 use Middlewares\Recaptcha;
+use Middlewares\Utils\Dispatcher;
 use Zend\Diactoros\ServerRequest;
-use mindplay\middleman\Dispatcher;
 
 class RecaptchaTest extends \PHPUnit_Framework_TestCase
 {
