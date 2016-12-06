@@ -4,15 +4,17 @@ namespace Middlewares\Tests;
 
 use Middlewares\Recaptcha;
 use Middlewares\Utils\Dispatcher;
-use Zend\Diactoros\ServerRequest;
+use Middlewares\Utils\Factory;
 
 class RecaptchaTest extends \PHPUnit_Framework_TestCase
 {
     public function testRecaptcha()
     {
+        $request = Factory::createServerRequest([], 'POST');
+
         $response = (new Dispatcher([
             new Recaptcha(uniqid()),
-        ]))->dispatch(new ServerRequest([], [], '/', 'POST'));
+        ]))->dispatch($request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
         $this->assertEquals(403, $response->getStatusCode());
