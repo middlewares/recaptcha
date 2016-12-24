@@ -4,11 +4,11 @@ namespace Middlewares;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Interop\Http\Middleware\ServerMiddlewareInterface;
-use Interop\Http\Middleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
 use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 
-class Recaptcha implements ServerMiddlewareInterface
+class Recaptcha implements MiddlewareInterface
 {
     /**
      * @var string
