@@ -2,11 +2,12 @@
 
 namespace Middlewares\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Middlewares\Recaptcha;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
 
-class RecaptchaTest extends \PHPUnit_Framework_TestCase
+class RecaptchaTest extends TestCase
 {
     public function testRecaptcha()
     {
