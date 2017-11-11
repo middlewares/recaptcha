@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares;
 
@@ -22,14 +23,8 @@ class Recaptcha implements MiddlewareInterface
 
     /**
      * Returns a recaptcha code.
-     *
-     * @param string      $siteKey
-     * @param array       $options
-     * @param string|null $language
-     *
-     * @return string
      */
-    public static function getCode($siteKey, array $options = [], $language = null)
+    public static function getCode(string $siteKey, array $options = [], string $language = null): string
     {
         $data = sprintf('data-sitekey="%s"', $siteKey);
 
@@ -47,22 +42,16 @@ EOT;
 
     /**
      * Constructor. Set the secret token.
-     *
-     * @param string $secret
      */
-    public function __construct($secret)
+    public function __construct(string $secret)
     {
         $this->secret = $secret;
     }
 
     /**
      * Set the attribute name to get the client ip.
-     *
-     * @param string $ipAttribute
-     *
-     * @return self
      */
-    public function ipAttribute($ipAttribute)
+    public function ipAttribute(string $ipAttribute): self
     {
         $this->ipAttribute = $ipAttribute;
 
@@ -71,13 +60,8 @@ EOT;
 
     /**
      * Process a server request and return a response.
-     *
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
-     *
-     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (!$this->isValid($request)) {
             return Utils\Factory::createResponse(403);
@@ -88,12 +72,8 @@ EOT;
 
     /**
      * Check whether the request is valid.
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return bool
      */
-    private function isValid(ServerRequestInterface $request)
+    private function isValid(ServerRequestInterface $request): bool
     {
         $method = strtoupper($request->getMethod());
 
@@ -114,12 +94,8 @@ EOT;
 
     /**
      * Get the client ip.
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return string
      */
-    private function getIp(ServerRequestInterface $request)
+    private function getIp(ServerRequestInterface $request): string
     {
         $server = $request->getServerParams();
 
