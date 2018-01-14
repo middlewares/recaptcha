@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares\Tests;
 
@@ -17,15 +18,36 @@ class RecaptchaTest extends TestCase
             new Recaptcha(uniqid()),
         ], $request);
 
-        $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
         $this->assertEquals(403, $response->getStatusCode());
+    }
+
+    public function testIpAttribute()
+    {
+        $request = Factory::createServerRequest([], 'POST')->withAttribute('ip', '0.0.0.0');
+
+        $response = Dispatcher::run([
+            (new Recaptcha(uniqid()))->ipAttribute('ip'),
+        ], $request);
+
+        $this->assertEquals(403, $response->getStatusCode());
+    }
+
+    public function testGetMethod()
+    {
+        $request = Factory::createServerRequest(['REMOTE_ADDR' => '0.0.0.0'], 'GET');
+
+        $response = Dispatcher::run([
+            (new Recaptcha(uniqid()))->ipAttribute('ip'),
+        ], $request);
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testCode()
     {
-        $expected = '<div class="g-recaptcha" data-sitekey="XXX"></div>'."\n".
+        $expected = '<div class="g-recaptcha" data-sitekey="XXX" data-foo="bar"></div>'."\n".
             '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>';
 
-        $this->assertEquals($expected, Recaptcha::getCode('XXX'));
+        $this->assertEquals($expected, Recaptcha::getCode('XXX', ['foo' => 'bar']));
     }
 }
