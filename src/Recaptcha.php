@@ -84,6 +84,6 @@ class Recaptcha implements MiddlewareInterface
             return $request->getAttribute($this->ipAttribute);
         }
 
-        return isset($server['REMOTE_ADDR']) ? $server['REMOTE_ADDR'] : '';
+        return $server['REMOTE_ADDR'] ?? '';
     }
 }
