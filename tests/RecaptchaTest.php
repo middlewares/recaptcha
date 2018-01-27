@@ -42,12 +42,4 @@ class RecaptchaTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
-
-    public function testCode()
-    {
-        $expected = '<div class="g-recaptcha" data-sitekey="XXX" data-foo="bar"></div>'."\n".
-            '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>';
-
-        $this->assertEquals($expected, Recaptcha::getCode('XXX', ['foo' => 'bar']));
-    }
 }

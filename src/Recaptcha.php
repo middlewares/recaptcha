@@ -22,25 +22,6 @@ class Recaptcha implements MiddlewareInterface
     private $ipAttribute;
 
     /**
-     * Returns a recaptcha code.
-     */
-    public static function getCode(string $siteKey, array $options = [], string $language = null): string
-    {
-        $data = sprintf('data-sitekey="%s"', $siteKey);
-
-        foreach ($options as $name => $value) {
-            $data .= sprintf(' data-%s="%s"', $name, $value);
-        }
-
-        $query = $language ? sprintf('?hl=%s', $language) : '';
-
-        return <<<EOT
-<div class="g-recaptcha" {$data}></div>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api.js{$query}"></script>
-EOT;
-    }
-
-    /**
      * Constructor. Set the secret token.
      */
     public function __construct(string $secret)
@@ -85,7 +66,7 @@ EOT;
         $data = $request->getParsedBody();
 
         $response = $recaptcha->verify(
-            isset($data['g-recaptcha-response']) ? $data['g-recaptcha-response'] : '',
+            $data['g-recaptcha-response'] ?? '',
             $this->getIp($request)
         );
 

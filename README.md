@@ -27,7 +27,13 @@ composer require middlewares/recaptcha
 
 ```php
 $dispatcher = new Dispatcher([
-	new Middlewares\Recaptcha($secretKey)
+    new Middlewares\Recaptcha($secretKey),
+
+    //in your view
+    function () {
+        echo '<div class="g-recaptcha" data-sitekey="XXX"></div>';
+        echo '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>';
+    }
 ]);
 
 $response = $dispatcher->dispatch(new ServerRequest());
@@ -52,25 +58,6 @@ $dispatcher = new Dispatcher([
     (new Middlewares\Recaptcha($secretKey))
         ->ipAttribute('client-ip')
 ]);
-```
-
-## Helpers
-
-### `Middlewares\Recaptcha::getCode(string $siteKey, array $options = [], $language = null)`
-
-In order to ease the recaptcha code insertion, this helper is provided accepting the following arguments:
-
-* `$siteKey` The public site key. You can get it on register the app.
-* `$options` Widget options. More info in [recaptcha docs](https://developers.google.com/recaptcha/docs/display)
-* `$language` To force the widget to render in a specific language. Auto-detects the user's language if unspecified.
-
-```html
-<form method="post">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <?= Middlewares\Recaptcha::getCode($siteKey, ['size' => 'compact']) ?>
-    <button type="submit">Register</button>
-</form>
 ```
 
 ---
