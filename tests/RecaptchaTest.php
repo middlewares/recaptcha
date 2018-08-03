@@ -12,7 +12,7 @@ class RecaptchaTest extends TestCase
 {
     public function testRecaptcha()
     {
-        $request = Factory::createServerRequest([], 'POST');
+        $request = Factory::createServerRequest('POST', '/');
 
         $response = Dispatcher::run([
             new Recaptcha(uniqid()),
@@ -23,7 +23,7 @@ class RecaptchaTest extends TestCase
 
     public function testIpAttribute()
     {
-        $request = Factory::createServerRequest([], 'POST')->withAttribute('ip', '0.0.0.0');
+        $request = Factory::createServerRequest('POST', '/')->withAttribute('ip', '0.0.0.0');
 
         $response = Dispatcher::run([
             (new Recaptcha(uniqid()))->ipAttribute('ip'),
@@ -34,7 +34,7 @@ class RecaptchaTest extends TestCase
 
     public function testGetMethod()
     {
-        $request = Factory::createServerRequest(['REMOTE_ADDR' => '0.0.0.0'], 'GET');
+        $request = Factory::createServerRequest('GET', '/', ['REMOTE_ADDR' => '0.0.0.0']);
 
         $response = Dispatcher::run([
             (new Recaptcha(uniqid()))->ipAttribute('ip'),

@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Middlewares;
 
+use Middlewares\Utils\Traits\HasResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -11,6 +12,8 @@ use ReCaptcha\ReCaptcha as GoogleRecaptcha;
 
 class Recaptcha implements MiddlewareInterface
 {
+    use HasResponseFactory;
+
     /**
      * @var string
      */
@@ -45,7 +48,7 @@ class Recaptcha implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (!$this->isValid($request)) {
-            return Utils\Factory::createResponse(403);
+            return $this->createResponse(403);
         }
 
         return $handler->handle($request);
