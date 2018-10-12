@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace Middlewares;
 
 use Middlewares\Utils\Traits\HasResponseFactory;
+use Middlewares\Utils\Factory;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -27,9 +29,10 @@ class Recaptcha implements MiddlewareInterface
     /**
      * Constructor. Set the secret token.
      */
-    public function __construct(string $secret)
+    public function __construct(string $secret, ResponseFactoryInterface $responseFactory = null)
     {
         $this->secret = $secret;
+        $this->responseFactory = $responseFactory ?: Factory::getResponseFactory();
     }
 
     /**
