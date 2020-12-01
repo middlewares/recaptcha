@@ -2,8 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
-[![Quality Score][ico-scrutinizer]][link-scrutinizer]
+![Testing][ico-ga]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 Middleware to use [google/recaptcha](https://github.com/google/recaptcha) library for spam prevention. Returns a `403` response if the request is not valid. More info about [Google reCAPTCHA](https://www.google.com/recaptcha).
@@ -78,11 +77,9 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/middlewares/recaptcha.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/middlewares/recaptcha/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/recaptcha.svg?style=flat-square
+[ico-ga]: https://github.com/middlewares/recaptcha/workflows/testing/badge.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/recaptcha.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/recaptcha
-[link-travis]: https://travis-ci.org/middlewares/recaptcha
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/recaptcha
 [link-downloads]: https://packagist.org/packages/middlewares/recaptcha
