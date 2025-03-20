@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class RecaptchaTest extends TestCase
 {
-    public function testRecaptcha()
+    public function testRecaptcha(): void
     {
         $request = Factory::createServerRequest('POST', '/');
 
@@ -21,7 +21,7 @@ class RecaptchaTest extends TestCase
         $this->assertEquals(403, $response->getStatusCode());
     }
 
-    public function testIpAttribute()
+    public function testIpAttribute(): void
     {
         $request = Factory::createServerRequest('POST', '/')->withAttribute('ip', '0.0.0.0');
 
@@ -32,7 +32,7 @@ class RecaptchaTest extends TestCase
         $this->assertEquals(403, $response->getStatusCode());
     }
 
-    public function testGetMethod()
+    public function testGetMethod(): void
     {
         $request = Factory::createServerRequest('GET', '/', ['REMOTE_ADDR' => '0.0.0.0']);
 

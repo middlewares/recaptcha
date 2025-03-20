@@ -31,7 +31,7 @@ class Recaptcha implements MiddlewareInterface
     /**
      * Constructor. Set the secret token.
      */
-    public function __construct(string $secret, ResponseFactoryInterface $responseFactory = null)
+    public function __construct(string $secret, ?ResponseFactoryInterface $responseFactory = null)
     {
         $this->secret = $secret;
         $this->responseFactory = $responseFactory ?: Factory::getResponseFactory();
