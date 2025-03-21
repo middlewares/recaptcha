@@ -74,6 +74,7 @@ class Recaptcha implements MiddlewareInterface
         $data = $request->getParsedBody();
 
         $response = $recaptcha->verify(
+            // @phpstan-ignore-next-line
             $data['g-recaptcha-response'] ?? '',
             $this->getIp($request)
         );
